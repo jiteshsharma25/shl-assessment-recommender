@@ -9,17 +9,18 @@ app = FastAPI(title="SHL Assessment Recommender")
 rag = SHLRAG("app/data/assessments.json")
 chatbot = SHLChatbot(rag)
 
-
-class UserQuery(BaseModel):
-    query: str
-
-
 @app.get("/")
 def home():
     return {
         "message": "SHL AI Assessment Recommender API Running"
     }
 
+@app.get("/health")
+def health():
+    return {"status": "healthy"}
+
+class UserQuery(BaseModel):
+    query: str
 
 @app.post("/recommend")
 def recommend_assessment(user_query: UserQuery):
