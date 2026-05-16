@@ -21,7 +21,7 @@ if st.button("Get Recommendations"):
 
     st.subheader("Recommended Assessments")
 
-    for item in data["recommendations"]:
+    for item in data["recommended_assessments"]:
         st.markdown(f"### {item['name']}")
         st.write(f"Category: {item['category']}")
         st.write(f"Skills: {', '.join(item['skills'])}")
