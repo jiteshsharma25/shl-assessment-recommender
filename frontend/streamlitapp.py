@@ -11,7 +11,7 @@ query = st.text_input(
 
 if st.button("Get Recommendations"):
     response = requests.post(
-    "https://shl-api-katu.onrender.com/recommend",
+    "https://shl-api-katu.onrender.com/chat",
     json={"query": query}
     )
     data = response.json()
