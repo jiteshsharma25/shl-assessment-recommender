@@ -13,41 +13,41 @@ class SHLChatbot:
 
         assessments = self.rag.retrieve(query)
 
-        context = "\n".join([
-            f"""
-            Name: {a['name']}
-            Category: {a['category']}
-            Skills: {', '.join(a['skills'])}
-            Description: {a['description']}
-            """
-            for a in assessments
-        ])
+        context = "\n".join(
+            [
+                f"""
+Name: {a['name']}
+Category: {a['category']}
+Skills: {', '.join(a['skills'])}
+Description: {a['description']}
+"""
+                for a in assessments
+            ]
+        )
 
         prompt = f"""
-        You are an SHL assessment recommendation assistant.
+You are an SHL assessment recommendation assistant.
 
-        User Query:
-        {query}
+User Query:
+{query}
 
-        Assessment Catalog:
-        {context}
+Assessment Catalog:
+{context}
 
-        Instructions:
-        - Recommend the most relevant assessments
-        - Explain WHY each assessment matches
-        - Mention skills evaluated
-        - Keep response professional and concise
-        """
+Instructions:
+- Recommend the most relevant assessments
+- Explain WHY each assessment matches
+- Mention skills evaluated
+- Keep response professional and concise
+"""
 
         try:
             response = self.model.generate_content(prompt)
-
             ai_response = response.text
 
         except Exception:
-
             # PROFESSIONAL FALLBACK RESPONSE
-            ai_response = self.generate_fallback_response(
+            ai_response = self.fallback_response(
                 query,
                 assessments
             )
@@ -57,30 +57,30 @@ class SHLChatbot:
             "recommended_assessments": assessments
         }
 
-    def generate_fallback_response(self, query, assessments):
+    def fallback_response(self, query, assessments):
 
         if not assessments:
-            return (
-                "I could not find suitable assessments "
-                "for the provided query."
-            )
+            return "No suitable assessments were found."
 
-        response = (
-            f"For the query '{query}', "
-            f"I recommend the following assessments:\n\n"
+        assessment_names = ", ".join(
+            [a["name"] for a in assessments]
         )
 
-        for a in assessments:
-            response += (
-                f"• {a['name']} ({a['category']})\n"
-                f"  Skills: {', '.join(a['skills'])}\n"
-                f"  Why: {a['description']}\n\n"
-            )
+        return (
+            f"Based on the hiring requirement "
+            f"'{query}', the system identified "
+            f"assessments that best match the "
+            f"required technical and behavioral "
+            f"skills.\n\n"
 
-        response += (
-            "These recommendations were selected "
-            "using semantic similarity retrieval "
-            "and skill matching."
+            f"The recommendations prioritize "
+            f"role relevance, skill alignment, "
+            f"and cognitive evaluation needs.\n\n"
+
+            f"Top recommended assessments include: "
+            f"{assessment_names}.\n\n"
+
+            f"These results were generated using "
+            f"semantic retrieval and AI-assisted "
+            f"recommendation logic."
         )
-
-        return response
