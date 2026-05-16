@@ -11,10 +11,9 @@ query = st.text_input(
 
 if st.button("Get Recommendations"):
     response = requests.post(
-        "http://127.0.0.1:8000/recommend",
-        json={"query": query}
+    "https://shl-api-katu.onrender.com/recommend",
+    json={"query": query}
     )
-
     data = response.json()
 
     st.subheader("AI Response")
