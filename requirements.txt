@@ -1,12 +1,8 @@
 fastapi
 uvicorn
-langchain
-langchain-community
-sentence-transformers
-faiss-cpu
-google-genai
-python-dotenv
-beautifulsoup4
-requests
 streamlit
-pydantic
+requests
+google-generativeai
+scikit-learn
+numpy
+pandas
