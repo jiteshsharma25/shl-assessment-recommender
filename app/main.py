@@ -22,7 +22,7 @@ def health():
 class UserQuery(BaseModel):
     query: str
 
-@app.post("/recommend")
+@app.post("/chat")
 def recommend_assessment(user_query: UserQuery):
     result = chatbot.generate_response(user_query.query)
     return result
