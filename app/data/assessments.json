@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Cognitive Ability Test",
+    "category": "Aptitude",
+    "skills": ["problem solving", "logical reasoning"],
+    "duration": 30,
+    "remote_support": true,
+    "description": "Measures candidate cognitive ability and logical thinking.",
+    "job_roles": ["Software Engineer", "Data Analyst"]
+  },
+  {
+    "name": "Personality Assessment",
+    "category": "Behavioral",
+    "skills": ["teamwork", "communication"],
+    "duration": 20,
+    "remote_support": true,
+    "description": "Evaluates workplace personality traits.",
+    "job_roles": ["HR", "Manager"]
+  },
+  {
+    "name": "Coding Assessment",
+    "category": "Technical",
+    "skills": ["python", "algorithms", "debugging"],
+    "duration": 60,
+    "remote_support": true,
+    "description": "Tests programming and debugging skills.",
+    "job_roles": ["Backend Developer", "ML Engineer"]
+  }
+]
